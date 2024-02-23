@@ -19,10 +19,11 @@ import { useState,useEffect, useRef } from "react";
   const AddMessageNode=(text:string)=>{
     const toAddText=document.createElement('div')
     toAddText.innerHTML=text;
+    toAddText.setAttribute('style','padding:1rem; background-color:#845d48; border-top-left-radius:1rem; border-top-right-radius:1rem; margin-left:10px; border-botton-right-radius:1rem;')
     sectionRef.current?.appendChild(toAddText)
   } 
   return (
-    <div className="w-full h-screen bg-bg_primary rounded-2xl p-8 relative flex flex-col  gap-[2rem]">
+    <div className="w-full h-screen bg-bg_primary rounded-2xl p-8 relative flex flex-col  gap-[.7rem]">
       <Navbar />
       <div className="heading font-mona_bold text-4xl text-primary_text">
         Tell me about your day
