@@ -27,11 +27,11 @@ import { useState,useEffect, useRef } from "react";
 
   return (
     <div className="w-full h-screen bg-bg_primary  p-8 relative flex flex-col  gap-[1.5rem] ">
-      <div className="heading font-mona_bold tab:text-7xl bg-gradient-to-r from-indigo-700 via-purple-300 to-pink-400 bg-clip-text text-transparent mobile:text-4xl mobile:leading-[3rem] laptop:absolute laptop:left-[50%] laptop:translate-x-[-50%] ">
+      <div className="heading font-mona_bold tab:text-7xl bg-gradient-to-r from-indigo-700 via-purple-300 to-pink-400 bg-clip-text text-transparent mobile:text-4xl mobile:leading-[3rem] w-full flex justify-center items-center">
         Hello User <br/>
         Tell me about your day
       </div>
-      <div className="h-[85vh] w-[95%] border-[2px] border-black overflow-scroll flex flex-col justify-start items-start gap-[2rem] overflow-x-hidden no-scrollbar " ref={sectionRef}>
+      <div className="h-[85vh] w-[95%] overflow-scroll flex flex-col justify-start items-start gap-[2rem] overflow-x-hidden no-scrollbar " ref={sectionRef}>
       {
 
       }
@@ -39,7 +39,7 @@ import { useState,useEffect, useRef } from "react";
       <div className="flex justify-start w-full relative" >
       
         <button type="submit" className="rounded-[.5rem] text-white px-4 py-2 bg-[rgba(255,255,255,.1)] w-fit " onClick={handleUserTextSubmission}>Enter</button>
-        <input type="text" className=" text-white px-[1rem] py-[0.5rem] bg-[rgba(255,255,255,.1)] rounded-2xl translate-x-[10%] w-[80%] focus:border-primary_text" placeholder="How has your day been" onChange={(e)=>{
+        <input type="text" className=" text-white px-[1rem] py-[0.5rem] bg-[rgba(255,255,255,.1)] rounded-2xl translate-x-[10%] w-[80%] focus:border-primary_text " placeholder="How has your day been" onChange={(e)=>{
         setCurrentUserInput(e.target.value.toString())
         }} value={currentUserInput}/>
       </div>
