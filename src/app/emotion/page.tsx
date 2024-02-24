@@ -1,17 +1,9 @@
 import EmotionCard from "../components/EmotionCard";
-import Navbar from "../components/Navbar";
 export default function Emotion() {
   return (
-    <div className="w-full h-screen bg-bg_primary rounded-2xl p-8">
-      <Navbar />
-      <div className="heading font-mona_bold text-4xl text-primary_text">
-        Supernatural Community
-        <div className="content w-full h-full flex gap-4 flex-wrap">
-          <EmotionCard />
-          <EmotionCard />
-          <EmotionCard />
-          <EmotionCard />
-        </div>
+    <div className="w-full h-screen bg-bg_primary  p-8">
+      <div className="heading font-mona_bold tab:text-7xl py-2 bg-gradient-to-r from-indigo-700 via-purple-300 to-pink-400 bg-clip-text text-transparent mobile:text-4xl mobile:leading-[3rem] w-full flex justify-center items-center">
+        My diary
       </div>
     </div>
   );
