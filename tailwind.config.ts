@@ -14,7 +14,7 @@ const config: Config = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       colors: {
-        bg_primary: "#fffde9",
+        bg_primary: "#000000",
         bg_secondary: "#fedbc3",
         primary_text: "#845d48",
       },
@@ -23,6 +23,11 @@ const config: Config = {
         mona_medium: "mona_medium",
         mona_regular: "mona",
       },
+      screens:{
+        'mobile':'320px',
+        'tab':'768px',
+        'laptop':'1024px',
+      }
     },
   },
   plugins: [],
