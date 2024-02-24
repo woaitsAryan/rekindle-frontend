@@ -1,7 +1,8 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
-
+import Navbar from "./components/Navbar";
+import Image from "next/image";
 export default function Home() {
   const [messages, setMessages] = useState<string[]>([]);
   const [currentUserInput, setCurrentUserInput] = useState<string>("");
@@ -45,6 +46,7 @@ export default function Home() {
 
   return (
     <div className="w-full h-screen bg-bg_primary  p-8 relative flex flex-col  gap-[1.5rem] justify-center">
+      <Navbar />
       <div className="heading font-mona_bold tab:text-7xl bg-gradient-to-r from-indigo-700 via-purple-300 to-pink-400 bg-clip-text text-transparent mobile:text-4xl mobile:leading-[3rem] w-full flex justify-center items-center  py-2 text-center">
         How did your day go?
       </div>
@@ -118,7 +120,7 @@ export default function Home() {
           ></div>
         )
       )}
-      <div className="flex flex-col md:flex-row justify-center w-full relative items-center gap-4 md:gap-16 z-20">
+      <div className="flex flex-row justify-center w-full relative items-center z-20">
         <textarea
           className=" resize-none text-white px-[1rem] py-[0.5rem] bg-[rgba(255,255,255,0)] rounded-2xl no-scrollbar w-full md:w-[40%] focus:border-primary_text break-words whitespace-pre-wrap h-auto leading-[1.75rem] border-b-2 border-white outline-none"
           placeholder="Write about how your day was."
@@ -128,13 +130,21 @@ export default function Home() {
           value={currentUserInput}
           ref={inputRef}
         />
-        <button
+        <Image
+          src="/images/send.png"
+          alt="send"
+          width={50}
+          height={50}
+          className="invert w-4 md:w-6 -translate-x-8 md:-translate-x-12 cursor-pointer"
+          onClick={handleUserTextSubmission}
+        />
+        {/* <button
           type="submit"
           className="rounded-[.5rem] text-white md:h-20 px-4 py-2 bg-[rgba(255,255,255,.1)] w-fit active:scale-[95%] transition-all duration-300 ease-linear"
           onClick={handleUserTextSubmission}
         >
           Enter &nbsp;&crarr;
-        </button>
+        </button> */}
       </div>
     </div>
   );

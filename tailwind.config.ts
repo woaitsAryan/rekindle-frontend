@@ -22,12 +22,13 @@ const config: Config = {
         mona_bold: "mona_bold",
         mona_medium: "mona_medium",
         mona_regular: "mona",
+        shadows: "Shadows Into Light",
       },
-      screens:{
-        'mobile':'320px',
-        'tab':'768px',
-        'laptop':'1024px',
-      }
+      screens: {
+        mobile: "320px",
+        tab: "768px",
+        laptop: "1024px",
+      },
     },
   },
   plugins: [],

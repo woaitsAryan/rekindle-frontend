@@ -5,6 +5,7 @@ import EmotionCard from "../components/EmotionCard";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Navbar from "../components/Navbar";
 interface JournalData {
   text: string;
   date: string;
@@ -80,6 +81,7 @@ export default function Emotion() {
 
   return (
     <div className="w-full min-h-screen bg-bg_primary flex flex-col justify-center items-center gap-[2rem]  p-8  relative">
+      <Navbar />
       <div className="heading font-mona_bold tab:text-7xl py-2 bg-gradient-to-r from-indigo-700 via-purple-300 to-pink-400 bg-clip-text text-transparent mobile:text-4xl mobile:leading-[3rem] w-full flex justify-center items-center">
         My diary
       </div>
@@ -98,16 +100,6 @@ export default function Emotion() {
         </button>
       </div>{" "}
       <div className="w-full gap-[1rem] tab:grid-cols-4 mobile:grid-cols-1 grid">
-        <EmotionCard
-          key={0}
-          response={
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet incidunt deleniti placeat non repellendus tempora nulla quasi saepe quaerat molestias."
-          }
-          text={
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet incidunt deleniti placeat non repellendus tempora nulla quasi saepe quaerat molestias."
-          }
-          date={"12 Feb"}
-        />
         {journalData.map((data, index) => (
           <EmotionCard
             key={index}
