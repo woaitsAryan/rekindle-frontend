@@ -1,10 +1,17 @@
 import React from "react";
-const EmotionCard = () => {
+import { getDayOfMonth,getMonth,getYear } from "@/helpers/datesHelper";
+interface EmotionCardProps {
+  response: string;
+  text: string;
+  date: string;
+}
+
+const EmotionCard = (props: EmotionCardProps) => {
   return (
-   <div className="bg-gray-400 flex flex-col gap-[.5rem] rounded-[1rem] px-[1rem] py-[0.5rem] w-[30%] z-[1000]">
-    <h1 className="text-xl font-bold">User prompt: Lorem ipsum dolor sit amet ...  </h1>
-    <p>Models reply :  Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore, neque molestias. Aliquam ad minima cum est. Et qui dicta accusantium.........</p>
-    <p className="w-full text-right font-semibold">27th November,2024</p>
+   <div className="bg-gray-400 flex flex-col gap-[.5rem] rounded-[1rem] px-[1rem] py-[0.5rem] w-full z-[1000] justify-around">
+    <h1 className="text-xl font-bold">{props.text.substring(0,100)}</h1>
+    <p>{props.response.substring(0,175)}</p>
+    <p className="w-full text-right font-semibold">{getDayOfMonth(props.date)} {getMonth(props.date)} {getYear(props.date)}</p>
    </div>
   );
 };
