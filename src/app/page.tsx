@@ -1,13 +1,18 @@
 "use client"
-import EmotionCard from "./components/EmotionCard";
-import Navbar from "./components/Navbar";
 import { useState,useEffect, useRef } from "react";
  export default function Home() {
   const [messages,setMessages]=useState<string[]>([]);
   const [currentUserInput,setCurrentUserInput]=useState<string>('')
   const [outputData,setOutputData]=useState<string>('')
   const sectionRef=useRef<HTMLDivElement>(null)
-
+  const inputRef =useRef<HTMLTextAreaElement>(null);
+//   useEffect(()=>{
+//     inputRef.current?.addEventListener('input', resizeInput); 
+//     function resizeInput() {
+//         if(inputRef.current)
+//         inputRef.current.style.height = inputRef.current?.value.length/10 + "px";
+// }
+//   },[inputRef.current?.value.length])
   const handleUserTextSubmission=async(e:any)=>{
     if(currentUserInput==="")
     return;
@@ -36,12 +41,12 @@ import { useState,useEffect, useRef } from "react";
 
       }
       </div>
-      <div className="flex justify-start w-full relative" >
+      <div className="flex justify-start w-full relative items-center" >
       
-        <button type="submit" className="rounded-[.5rem] text-white px-4 py-2 bg-[rgba(255,255,255,.1)] w-fit " onClick={handleUserTextSubmission}>Enter</button>
-        <input type="text" className=" text-white px-[1rem] py-[0.5rem] bg-[rgba(255,255,255,.1)] rounded-2xl translate-x-[10%] w-[80%] focus:border-primary_text " placeholder="How has your day been" onChange={(e)=>{
+        <button type="submit" className="rounded-[.5rem] text-white px-4 py-2 bg-[rgba(255,255,255,.1)] w-fit h-fit " onClick={handleUserTextSubmission}>Enter</button>
+        <textarea rows={3} cols={50} className=" resize-none text-white px-[1rem] py-[0.5rem] bg-[rgba(255,255,255,.1)] rounded-2xl no-scrollbar translate-x-[10%] w-[80%] focus:border-primary_text break-words whitespace-pre-wrap h-auto leading-[1.75rem]" placeholder="How has your day been" onChange={(e)=>{
         setCurrentUserInput(e.target.value.toString())
-        }} value={currentUserInput}/>
+        }} value={currentUserInput} ref={inputRef}/>
       </div>
       
     </div>
