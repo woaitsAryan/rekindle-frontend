@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
 import { useState, useEffect } from "react";
 import EmotionCard from "../components/EmotionCard";
-import axios from 'axios';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 interface JournalData {
   text: string;
   date: string;
@@ -15,21 +15,49 @@ interface JournalData {
 }
 
 export default function Emotion() {
-  const [inputValue, setInputValue] = useState<string>('');
+  const [inputValue, setInputValue] = useState<string>("");
   const [emotion, setEmotion] = useState<string>("");
   const [journalData, setJournalData] = useState<JournalData[]>([]);
-  const validEmotions = ['admiration', 'amusement', 'anger', 'annoyance', 'approval', 'caring', 'confusion', 'curiosity', 'desire', 'disappointment', 'disapproval', 'disgust','embarrassment','excitement','fear','gratitude','grief','joy','love','nervousness','optimism','pride','realization','relief','remorse','sadness','surprise','neutral']
+  const validEmotions = [
+    "admiration",
+    "amusement",
+    "anger",
+    "annoyance",
+    "approval",
+    "caring",
+    "confusion",
+    "curiosity",
+    "desire",
+    "disappointment",
+    "disapproval",
+    "disgust",
+    "embarrassment",
+    "excitement",
+    "fear",
+    "gratitude",
+    "grief",
+    "joy",
+    "love",
+    "nervousness",
+    "optimism",
+    "pride",
+    "realization",
+    "relief",
+    "remorse",
+    "sadness",
+    "surprise",
+    "neutral",
+  ];
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get('http://localhost:8000/journal')
+      const response = await axios.get("http://localhost:8000/journal");
       setJournalData(response.data.response);
-    }
+    };
     fetchData();
-  }, [])
+  }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-
     for (const word of validEmotions) {
       if (e.target.value.includes(word)) {
         setEmotion(word);
@@ -37,45 +65,58 @@ export default function Emotion() {
       }
     }
     setInputValue(e.target.value);
-  }
+  };
 
   const handleButtonClick = async () => {
     if (!emotion) {
-      alert('Invalid emotion');
+      alert("Invalid emotion");
       return;
     }
-    const response = await axios.get(`http://localhost:8000/journal?emotion=${emotion}`)
+    const response = await axios.get(
+      `http://localhost:8000/journal?emotion=${emotion}`
+    );
     setJournalData(response.data.response);
-  }
+  };
 
   return (
     <div className="w-full min-h-screen bg-bg_primary flex flex-col justify-center items-center gap-[2rem]  p-8  relative">
       <div className="heading font-mona_bold tab:text-7xl py-2 bg-gradient-to-r from-indigo-700 via-purple-300 to-pink-400 bg-clip-text text-transparent mobile:text-4xl mobile:leading-[3rem] w-full flex justify-center items-center">
         My diary
       </div>
-      <div className="flex items-center justify-center z-20">
+      <div className="flex flex-col md:flex-row items-center justify-center z-20 gap-4">
         <input
-          className="z-20 resize-none text-white px-[1rem] py-[0.5rem] bg-[rgba(255,255,255,.1)] rounded-2xl no-scrollbar w-[30%] focus:border-primary_text break-words whitespace-pre-wrap h-auto leading-[1.75rem] w-full"
-          placeholder="Search"
+          className="z-20 resize-none text-white px-[1rem] py-[0.5rem] bg-[rgba(255,255,255,0)] outline-none rounded-2xl no-scrollbar  focus:border-primary_text break-words whitespace-pre-wrap h-auto leading-[1.75rem] w-full border-b-2 border-white"
+          placeholder="Search in your diary..."
           value={inputValue}
           onChange={handleInputChange}
         />
-        <button onClick={handleButtonClick} className="ml-2 rounded-[.5rem] text-white px-4 py-2 bg-[rgba(255,255,255,.1)] w-fit h-fit">
-          Search
+        <button
+          onClick={handleButtonClick}
+          className="ml-2 rounded-[.5rem] text-white px-6 py-2 bg-[rgba(255,255,255,.1)] w-fit text-nowrap h-fit"
+        >
+          Search &nbsp;&rarr;
         </button>
-      </div>      <div className="w-full gap-[1rem] tab:grid-cols-4 mobile:grid-cols-1 grid">
-
-        {journalData.map((data, index) =>
+      </div>{" "}
+      <div className="w-full gap-[1rem] tab:grid-cols-4 mobile:grid-cols-1 grid">
+        <EmotionCard
+          key={0}
+          response={
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet incidunt deleniti placeat non repellendus tempora nulla quasi saepe quaerat molestias."
+          }
+          text={
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet incidunt deleniti placeat non repellendus tempora nulla quasi saepe quaerat molestias."
+          }
+          date={"12 Feb"}
+        />
+        {journalData.map((data, index) => (
           <EmotionCard
             key={index}
             response={data.response}
             text={data.text}
             date={data.date}
           />
-        )
-        }
+        ))}
       </div>
-
     </div>
   );
 }

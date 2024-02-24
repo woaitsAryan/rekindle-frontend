@@ -23,9 +23,12 @@ export default function Home() {
     AddMessageNode(currentUserInput);
     setIsSubmitted(true);
     setLoading(true);
-    const response = await axios.post("http://localhost:8000/journal", {
-      text: currentUserInput,
-    });
+    const response = await axios.post(
+      "https://crucial-internal-mouse.ngrok-free.app/journal",
+      {
+        text: currentUserInput,
+      }
+    );
     setLoading(false);
     setOutputData(response.data.response);
     AddMessageNode(response.data.response);
