@@ -26,8 +26,8 @@ import { useState,useEffect, useRef } from "react";
   } 
 
   return (
-    <div className="w-full h-screen bg-bg_primary  p-8 relative flex flex-col  gap-[1.5rem]">
-      <div className="heading font-mona_bold tab:text-7xl bg-gradient-to-r from-indigo-700 via-purple-300 to-pink-400 bg-clip-text text-transparent mobile:text-4xl mobile:leading-[3rem]">
+    <div className="w-full h-screen bg-bg_primary  p-8 relative flex flex-col  gap-[1.5rem] ">
+      <div className="heading font-mona_bold tab:text-7xl bg-gradient-to-r from-indigo-700 via-purple-300 to-pink-400 bg-clip-text text-transparent mobile:text-4xl mobile:leading-[3rem] laptop:absolute laptop:left-[50%] laptop:translate-x-[-50%] ">
         Hello User <br/>
         Tell me about your day
       </div>
