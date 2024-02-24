@@ -1,5 +1,7 @@
 "use client"
 import { useState,useEffect, useRef } from "react";
+import axios from 'axios';
+
  export default function Home() {
   const [messages,setMessages]=useState<string[]>([]);
   const [currentUserInput,setCurrentUserInput]=useState<string>('')
@@ -18,9 +20,13 @@ import { useState,useEffect, useRef } from "react";
     return;
     setMessages([...messages,currentUserInput])
     AddMessageNode(currentUserInput)
-    //await request then add message
-    setOutputData('a')
-    AddMessageNode('whatever is output')
+    
+    const response = await axios.post('http://localhost:8000/journal', {
+      text: currentUserInput
+    })
+
+    setOutputData(response.data.response)
+    AddMessageNode(response.data.response)
 
   }
   const AddMessageNode=(text:string)=>{
@@ -33,8 +39,7 @@ import { useState,useEffect, useRef } from "react";
   return (
     <div className="w-full h-screen bg-bg_primary  p-8 relative flex flex-col  gap-[1.5rem] ">
       <div className="heading font-mona_bold tab:text-7xl bg-gradient-to-r from-indigo-700 via-purple-300 to-pink-400 bg-clip-text text-transparent mobile:text-4xl mobile:leading-[3rem] w-full flex justify-center items-center">
-        Hello User <br/>
-        Tell me about your day
+        How did your day go?
       </div>
       <div className="h-[85vh] w-[95%] overflow-scroll flex flex-col justify-start items-start gap-[2rem] overflow-x-hidden no-scrollbar " ref={sectionRef}>
       {
