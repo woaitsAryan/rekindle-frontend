@@ -65,7 +65,7 @@ export default function Emotion() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get(`http://localhost:8000/journal`);
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/journal`);
       setJournalData(response.data.response);
     };
     fetchData();
