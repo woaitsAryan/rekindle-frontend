@@ -87,7 +87,7 @@ export default function Emotion() {
       return;
     }
     const response = await axios.get(
-      `http://localhost:8000/journal?emotion=${emotion}`
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/journal?emotion=${emotion}`
     );
     setJournalData(response.data.response);
   };

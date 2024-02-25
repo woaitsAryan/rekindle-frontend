@@ -26,7 +26,7 @@ export default function Home() {
     setIsSubmitted(true);
     setLoading(true);
     const response = await axios.post(
-      `http://localhost:8000/journal`,
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/journal`,
       {
         text: currentUserInput,
       }
