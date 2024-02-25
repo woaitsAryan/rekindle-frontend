@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import EmotionCard from "../components/EmotionCard";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
+import Modal from "../components/Modal";
 import "react-toastify/dist/ReactToastify.css";
 import Navbar from "../components/Navbar";
 interface JournalData {
@@ -14,11 +14,24 @@ interface JournalData {
   emotion3: string;
   response: string;
 }
+interface ModalData{
+  prompt:string,
+    outputData:string,
+    date:Date,
+    showModal:React.Dispatch<React.SetStateAction<boolean>>
+}
 
 export default function Emotion() {
   const [inputValue, setInputValue] = useState<string>("");
   const [emotion, setEmotion] = useState<string>("");
   const [journalData, setJournalData] = useState<JournalData[]>([]);
+  const [modal,showModal]=useState<boolean>(false)
+  const [selectedModalData,setSelectedModalData]=useState<ModalData >({
+    prompt:'',
+    outputData:'',
+    date:new Date(),
+    showModal:showModal
+  })
   const validEmotions = [
     "admiration",
     "amusement",
@@ -52,7 +65,7 @@ export default function Emotion() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get("http://localhost:8000/journal");
+      const response = await axios.get(`http://localhost:8000/journal`);
       setJournalData(response.data.response);
     };
     fetchData();
@@ -82,6 +95,9 @@ export default function Emotion() {
   return (
     <div className="w-full min-h-screen bg-bg_primary flex flex-col justify-center items-center gap-[2rem]  p-8  relative">
       <Navbar />
+      {
+        modal&&<Modal {...selectedModalData}/>
+      }
       <div className="heading font-mona_bold tab:text-7xl py-2 bg-gradient-to-r from-indigo-700 via-purple-300 to-pink-400 bg-clip-text text-transparent mobile:text-4xl mobile:leading-[3rem] w-full flex justify-center items-center">
         My diary
       </div>
@@ -106,6 +122,8 @@ export default function Emotion() {
             response={data.response}
             text={data.text}
             date={data.date}
+            setSelectedModalData={setSelectedModalData}
+            showModal={showModal}
           />
         ))}
       </div>

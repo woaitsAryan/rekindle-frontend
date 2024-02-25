@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 const Navbar = () => {
   return (
-    <div className="mobile:w-[100%] md:w-[60%] h-16 mx-auto bg-black border-t-[2px] border-b-[2px] border-[#aeaeae40] md:rounded-full absolute top-4 left-1/2 -translate-x-1/2  px-6 flex items-center justify-between z-[100]">
+    <div className="mobile:w-[100%] md:w-[60%] h-16 bg-black border-t-[2px] border-b-[2px] border-[#aeaeae40] md:rounded-full sticky top-4 left-[50%] laptop:translate-x-[-30%]  px-6 flex items-center justify-between z-[1000000]">
       <div className="h-full flex gap-2 items-center">
         <Image
           src="/images/logo.png"
