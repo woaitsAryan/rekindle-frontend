@@ -14,15 +14,18 @@ const config: Config = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       colors: {
-        bg_primary: "#0d0d0d",
-        bg_secondary: "#fedbc3",
-        primary_text: "#845d48",
+        bg_primary: "#f0eee5",
+        primary_text: "#29261b",
+        outline: "#65635840",
+        btn: "#ba5b38",
       },
       fontFamily: {
         mona_bold: "mona_bold",
         mona_medium: "mona_medium",
         mona_regular: "mona",
         shadows: "Shadows Into Light",
+        coper: "CoperReg",
+        coperHead: "CoperHeading",
       },
       screens: {
         mobile: "320px",

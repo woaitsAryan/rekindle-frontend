@@ -17,6 +17,14 @@
   font-family: mona;
   src: url("/fonts/MonaSans-Regular.ttf");
 }
+@font-face {
+  font-family: CoperHeading;
+  src: url("/fonts/CoperHeading.ttf");
+}
+@font-face {
+  font-family: CoperReg;
+  src: url("/fonts/CoperRed.ttf");
+}
 @layer utilities {
   /* Hide scrollbar for Chrome, Safari and Opera */
   .no-scrollbar::-webkit-scrollbar {
