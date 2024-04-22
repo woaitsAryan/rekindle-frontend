@@ -14,24 +14,24 @@ interface JournalData {
   emotion3: string;
   response: string;
 }
-interface ModalData{
-  prompt:string,
-    outputData:string,
-    date:Date,
-    showModal:React.Dispatch<React.SetStateAction<boolean>>
+interface ModalData {
+  prompt: string;
+  outputData: string;
+  date: Date;
+  showModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function Emotion() {
   const [inputValue, setInputValue] = useState<string>("");
   const [emotion, setEmotion] = useState<string>("");
   const [journalData, setJournalData] = useState<JournalData[]>([]);
-  const [modal,showModal]=useState<boolean>(false)
-  const [selectedModalData,setSelectedModalData]=useState<ModalData >({
-    prompt:'',
-    outputData:'',
-    date:new Date(),
-    showModal:showModal
-  })
+  const [modal, showModal] = useState<boolean>(false);
+  const [selectedModalData, setSelectedModalData] = useState<ModalData>({
+    prompt: "",
+    outputData: "",
+    date: new Date(),
+    showModal: showModal,
+  });
   const validEmotions = [
     "admiration",
     "amusement",
@@ -65,7 +65,9 @@ export default function Emotion() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/journal`);
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/journal`
+      );
       setJournalData(response.data.response);
     };
     fetchData();
@@ -93,29 +95,27 @@ export default function Emotion() {
   };
 
   return (
-    <div className="w-full min-h-screen bg-bg_primary flex flex-col justify-center items-center gap-[2rem]  p-8  relative">
+    <div className="w-full min-h-screen bg-bg_primary flex flex-col  items-center gap-[2rem] p-8  relative">
       <Navbar />
-      {
-        modal&&<Modal {...selectedModalData}/>
-      }
-      <div className="heading font-mona_bold tab:text-7xl py-2 bg-gradient-to-r from-indigo-700 via-purple-300 to-pink-400 bg-clip-text text-transparent mobile:text-4xl mobile:leading-[3rem] w-full flex justify-center items-center">
-        My diary
+      {modal && <Modal {...selectedModalData} />}
+      <div className="heading  tab:text-6xl mobile:text-3xl mobile:leading-[3rem] w-full flex justify-center items-center  py-2 text-center font-coperHead z-[1000]">
+        Personal diary
       </div>
       <div className="flex flex-col md:flex-row items-center justify-center z-20 gap-4">
         <input
-          className="z-20 resize-none text-white px-[1rem] py-[0.5rem] bg-[rgba(255,255,255,0)] outline-none rounded-2xl no-scrollbar  focus:border-primary_text break-words whitespace-pre-wrap h-auto leading-[1.75rem] w-full border-b-2 border-white"
+          className="z-20 resize-none text-primary_text px-[1rem] py-[0.5rem] bg-white outline-none rounded-xl border-outline no-scrollbar  focus:border-primary_text break-words whitespace-pre-wrap  leading-[1.75rem] w-full border-2 min-w-[90vw] md:min-w-[40vw] h-12"
           placeholder="Search in your diary..."
           value={inputValue}
           onChange={handleInputChange}
         />
         <button
           onClick={handleButtonClick}
-          className="ml-2 rounded-[.5rem] text-white px-6 py-2 bg-[rgba(255,255,255,.1)] w-fit text-nowrap h-fit"
+          className="ml-2 rounded-[.5rem] text-white px-4 md:px-6 py-1 md:py-2 bg-btn w-fit text-nowrap h-10 md:h-12"
         >
           Search &nbsp;&rarr;
         </button>
       </div>{" "}
-      <div className="w-full gap-[1rem] tab:grid-cols-4 mobile:grid-cols-1 grid">
+      <div className="w-full gap-[1rem] tab:grid-cols-3 mobile:grid-cols-1 grid">
         {journalData.map((data, index) => (
           <EmotionCard
             key={index}
