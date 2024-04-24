@@ -6,6 +6,7 @@ import axios from "axios";
 import Modal from "../components/Modal";
 import "react-toastify/dist/ReactToastify.css";
 import Navbar from "../components/Navbar";
+import backend from "../../../lib/axios";
 interface JournalData {
   text: string;
   date: string;
@@ -24,7 +25,16 @@ interface ModalData {
 export default function Emotion() {
   const [inputValue, setInputValue] = useState<string>("");
   const [emotion, setEmotion] = useState<string>("");
-  const [journalData, setJournalData] = useState<JournalData[]>([]);
+  const [journalData, setJournalData] = useState<JournalData[]>([
+  {
+  text: "My day started off well, I had a good nights sleep and woke up feeling refreshed. I had a good breakfast and went for a walk in the park. I met a friend and we had a good chat. I felt happy and content. I am looking forward to the rest of the day.",
+  date: "2022-01-01",
+  emotion1: "Happy",
+  emotion2: "Excited",
+  emotion3: "Content",
+  response: "This is a dummy response",
+}
+  ]);
   const [modal, showModal] = useState<boolean>(false);
   const [selectedModalData, setSelectedModalData] = useState<ModalData>({
     prompt: "",
@@ -65,8 +75,8 @@ export default function Emotion() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/journal`
+      const response = await backend.get(
+        `/journal`
       );
       setJournalData(response.data.response);
     };
@@ -88,8 +98,8 @@ export default function Emotion() {
       alert("Invalid emotion");
       return;
     }
-    const response = await axios.get(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/journal?emotion=${emotion}`
+    const response = await backend.get(
+      `/journal?emotion=${emotion}`
     );
     setJournalData(response.data.response);
   };

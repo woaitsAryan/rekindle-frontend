@@ -31,8 +31,8 @@ const EmotionCard = (props: EmotionCardProps) => {
       <h1 className="text-xl font-bold font-coperHead text-primary_text">
         {props.text.substring(0, 100)}
       </h1>
-      <p>{props.response.substring(0, 175)}</p>
-      <p className="w-full text-right font-semibold mt-4">
+      <p className="text-primary_text">{props.response.substring(0,175)}</p>
+      <p className="w-full text-right font-semibold mt-4 text-primary_text">
         {getDayOfMonth(props.date)} {getMonth(props.date)} {getYear(props.date)}
       </p>
     </div>
