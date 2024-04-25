@@ -3,4 +3,4 @@ services:
   intel-frontend:
     build: .
     ports:
-      - "3000:3000"
+      - "3050:3050"

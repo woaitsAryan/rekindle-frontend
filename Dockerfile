@@ -3,5 +3,5 @@ WORKDIR /app
 COPY . .
 RUN npm install --silent
 RUN npm run build
-EXPOSE 3000
+EXPOSE 3050
 CMD ["npm", "start"]
