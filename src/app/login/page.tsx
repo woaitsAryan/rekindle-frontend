@@ -13,7 +13,6 @@ export default function LoginPage() {
 
     const handleLogin = async (e: any) => {
         e.preventDefault();
-        console.log(email, password)
         try {
             const response = await backend.post('/auth/login', {
                 email,
@@ -59,6 +58,12 @@ export default function LoginPage() {
                     </button>
                 </div>
             </form>
+            <button
+                onClick={() => router.push('/register')}
+                className="text-primary_text cursor-pointer underline z-50"
+            >
+                Don&apos;t have an account? Sign up
+            </button>
         </main>
     );
 }

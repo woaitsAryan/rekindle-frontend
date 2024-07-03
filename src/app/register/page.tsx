@@ -20,8 +20,8 @@ export default function LoginPage() {
                 name
             })
             Cookie.set('token', response.data.token)
+            Cookie.set('name', name)
             router.push('/')
-
         }
         catch (error: any) {
             console.log(error.response.data)
@@ -67,6 +67,12 @@ export default function LoginPage() {
                     </button>
                 </div>
             </form>
+            <button
+                onClick={() => router.push('/login')}
+                className="text-primary_text cursor-pointer underline z-50"
+            >
+                Have an account? Sign in
+            </button>
         </main>
     );
 }

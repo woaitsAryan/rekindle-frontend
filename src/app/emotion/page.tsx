@@ -81,7 +81,7 @@ export default function Emotion() {
       setJournalData(response.data.response);
     };
     fetchData();
-  }, []);
+  }, []); 
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     for (const word of validEmotions) {

@@ -5,6 +5,9 @@ import Navbar from "./components/Navbar";
 import Image from "next/image";
 import backend from "../../lib/axios";
 import { toast } from "react-toastify";
+import Cookie from 'js-cookie'
+import { useRouter } from "next/navigation";
+
 export default function Home() {
   const [messages, setMessages] = useState<string[]>([]);
   const [currentUserInput, setCurrentUserInput] = useState<string>("");
@@ -14,37 +17,21 @@ export default function Home() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [content, setContent] = useState<any>(null);
-  //   useEffect(()=>{
-  //     inputRef.current?.addEventListener('input', resizeInput);
-  //     function resizeInput() {
-  //         if(inputRef.current)
-  //         inputRef.current.style.height = inputRef.current?.value.length/10 + "px";
-  // }
-  //   },[inputRef.current?.value.length])
+  const router = useRouter()
   const handleUserTextSubmission = async (e: any) => {
     if (currentUserInput === "") return;
     setMessages([...messages, currentUserInput]);
     AddMessageNode(currentUserInput);
     setIsSubmitted(true);
     setLoading(true);
-    // const toastID = toast.info("Processing your request", {
-    //   autoClose: false
-    // }
-    // )
     const response = await backend.post(
       "/journal",
       {
         text: currentUserInput,
       }
     );
-    // toast.update(toastID, {
-    //   render: 'Response fetched',
-    //   type: toast.TYPE.SUCCESS,
-    //   autoClose: 5000
-    // });
     setLoading(false);
     setOutputData(response.data.response);
-    // AddMessageNode(response.data.response);
     setContent(response.data.response);
     setCurrentUserInput("");
   };
@@ -63,25 +50,28 @@ export default function Home() {
   };
   const [salutation, setSalutation] = useState("Good Morning,");
   useEffect(() => {
-    
+    const cookie = Cookie.get('token')
+    const name = Cookie.get('name')
+    if (!cookie || !name) {
+      router.push('/register')
+    }
     const current = new Date();
     const time = current.getHours();
     if (time > 0 && time < 12) {
-      setSalutation("Good Morning, Aryan");
+      setSalutation(`Good Morning, ${name}`);
     } else if (time > 12 && time < 4) {
-      setSalutation("Good Afternoon, Aryan");
+      setSalutation(`Good Afternoon, ${name}`);
     } else {
-      setSalutation("Good Evening, Aryan");
+      setSalutation(`Good Evening, ${name}`);
     }
   }, []);
   return (
     <div className="w-full overflow-hidden h-screen bg-bg_primary  p-8 relative flex flex-col  gap-[2rem]">
       <Navbar />
       {!outputData && !loading && (
-        <div className="heading tab:text-6xl mobile:text-3xl mobile:leading-[3rem] w-full flex justify-center items-center  py-2 text-center font-coperHead absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[1000]">
-          {salutation}
-          <br />
-          How was your day?
+        <div className="heading tab:text-6xl mobile:text-3xl mobile:leading-[3rem] w-full flex flex-col gap-4 justify-center items-center py-2 text-center font-coperHead absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[1000]">
+          <div>{salutation}</div>
+          <div>How was your day?</div>
         </div>
       )}
 
