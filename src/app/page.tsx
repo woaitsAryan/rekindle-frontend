@@ -25,7 +25,7 @@ export default function Home() {
     setIsSubmitted(true);
     setLoading(true);
     const response = await backend.post(
-      "/journal",
+      "/journal/",
       {
         text: currentUserInput,
       }

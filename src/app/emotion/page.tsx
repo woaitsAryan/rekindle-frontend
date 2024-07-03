@@ -76,7 +76,7 @@ export default function Emotion() {
   useEffect(() => {
     const fetchData = async () => {
       const response = await backend.get(
-        `/journal`
+        `/journal/`
       );
       setJournalData(response.data.response);
     };
@@ -99,7 +99,7 @@ export default function Emotion() {
       return;
     }
     const response = await backend.get(
-      `/journal?emotion=${emotion}`
+      `/journal/?emotion=${emotion}`
     );
     setJournalData(response.data.response);
   };
